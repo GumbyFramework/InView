@@ -1,5 +1,5 @@
 /**
-* Gumby InView - 1.0.0
+* Gumby InView
 */
 !function($) {
 

@@ -5,15 +5,11 @@
 
 	'use strict';
 
-	if(Gumby.gumbyTouch) {
-		return;
-	}
-
 	function InViewWatcher($el){
 		
 		Gumby.debug('Initializing InViewWatcher', $el);
 		
-		//Store each instance of the element inside its own instance of this closure 
+		//store the element inside this class
 		this.$el = $el;
 
 		var scope = this;
@@ -29,21 +25,46 @@
 	}
 	
 	InViewWatcher.prototype.setup = function(){
+
 		Gumby.debug('Setting up instance of InViewWatcher', this.$el);
 
 		this.targets = this.parseTargets();
 
-		var classname = Gumby.selectAttr.apply(this.$el, ['classname']) || [];
+		var classname = Gumby.selectAttr.apply(this.$el, ['classname']);
 
-		if(classname.indexOf("|") > -1){
-			classname = classname.split("|");
+
+		//at this point the classname is either a string, or false;
+
+		//if its false, easy.
+		if(!classname){
+			this.classname = "active";
+			this.classnameBottom = "";
+			this.classnameTop = "";
+		}else{
+			//if its a string, it could be seperated by a pipe
+
+			if(classname.indexOf("|") > -1){
+				classname = classname.split("|");
+				//now classname is an array
+
+				this.classname = classname[0];
+				this.classnameBottom = classname[1] || "";
+				this.classnameTop = classname[2] || classname[1] || "";
+
+			}else{
+
+				//if no pipe, then use only classname
+				this.classname = classname;
+				this.classnameBottom = "";
+				this.classnameTop = "";
+
+			}
+
+
 		}
-		
-		this.classname =  classname[0] || "active";
-		this.classnameBottom = classname[1] || "";
-		this.classnameTop = classname[2] || classname[1] || "";
-
+		//evaluate offsets
 		var offset = Gumby.selectAttr.apply(this.$el, ['offset']);
+		
 		if(offset != false){
 			offset = offset.split("|");
 		}else{
@@ -53,7 +74,7 @@
 		this.offset =  offset[0] || 0;
 		this.offsetTop = offset[1] || offset[0];
 		this.offsetBottom = this.offset;
-	}
+	};
 
 	// parse data-for attribute
 	InViewWatcher.prototype.parseTargets = function() {
@@ -80,6 +101,7 @@
 	/*
 		Utility Method for managing Scrolling
 	*/
+	//Variables for Initialization
 	var t, k, tmp, tar, ot, oh, offt, offb, wh = $(window).height(), watchers = [];
 	//on scroll - loop through elements
 	// if the element is on the screen, give it the class

@@ -33,8 +33,12 @@
 
 		this.targets = this.parseTargets();
 
-		var classname = Gumby.selectAttr.apply(this.$el, ['classname']).split("|");
+		var classname = Gumby.selectAttr.apply(this.$el, ['classname']) || [];
 
+		if(classname.indexOf("|") > -1){
+			classname = classname.split("|");
+		}
+		
 		this.classname =  classname[0] || "active";
 		this.classnameBottom = classname[1] || "";
 		this.classnameTop = classname[2] || classname[1] || "";

@@ -169,7 +169,7 @@
 				}
 			}
 		}
-	});
+	}).trigger('scroll');
 
 	//on resize - update window height reference
 	//and trigger scroll

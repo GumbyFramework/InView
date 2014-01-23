@@ -169,7 +169,7 @@
 				}
 			}
 		}
-	}).trigger('scroll');
+	});
 
 	//on resize - update window height reference
 	//and trigger scroll
@@ -201,6 +201,8 @@
 			$this.data('isInView', true);
 			watchers.push(new InViewWatcher($this));
 		});
+
+		$(window).trigger('scroll');
 	});
 
 

@@ -72,7 +72,7 @@
 		}
 
 		this.offset =  offset[0] || 0;
-		this.offsetTop = offset[1] || offset[0];
+		this.offsetTop = offset[1] || offset[0] || 0;
 		this.offsetBottom = this.offset;
 	};
 

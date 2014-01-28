@@ -3,7 +3,7 @@ InView
 
 This Gumby Framework Extension makes it easy to assign class names for elements as they appear on the screen (in view). And to remove class names as they fall off the screen (not in view).
 
-For more detailed documentation please check out the [Gumby docs](http://gumbyframework.com).
+For a live example check out the documentation [Gumby docs](http://gumbyframework.com/docs/extensions/#!/inview).
 
 Installation
 ------------

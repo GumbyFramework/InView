@@ -178,7 +178,11 @@
 		$(window).trigger('scroll');
 	});
 
-
+	//on page refresh - trigger scroll
+	$(window).load(function () {
+		$(window).trigger('scroll');
+	});
+	
 	// add toggle Initialization
 	Gumby.addInitalisation('inview', function(all) {
 		

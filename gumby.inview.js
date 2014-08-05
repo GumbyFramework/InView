@@ -80,8 +80,8 @@
 	InViewWatcher.prototype.parseTargets = function() {
 		var targetStr = Gumby.selectAttr.apply(this.$el, ['target']);
 
-		// no targets so return false
-		if(!targetStr) {
+		// no targets so return false (if attr set but no value, targetStr will be true (also check for length)
+		if(!targetStr.length) {
 			return false;
 		}
 
